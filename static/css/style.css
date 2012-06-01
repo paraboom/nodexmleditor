@@ -1,0 +1,32 @@
+@import url('normalize.css');
+
+body {
+    font-family: Arial;
+}
+
+.xml-struct,
+.xml-nested {
+    list-style: none;
+    margin: 0;
+}
+
+.xml-struct li {
+    margin: 0.75em 0;
+}
+
+.xml-node-name {
+    font-weight: bold;
+}
+
+.xml-node-attribute {
+    display: inline-block;
+    color: #556dff;
+}
+
+.xml-node-attribute:first-child {
+    margin-left: 0.5em;
+}
+
+.xml-node-text {
+    color: #555;
+}

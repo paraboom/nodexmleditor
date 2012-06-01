@@ -1,0 +1,17 @@
+mixin childs(node)
+    if node.name
+        li.xml-node-name= node.name
+            if node.attributes
+                each val, key in node.attributes
+                    span.xml-node-attribute= "(" + key + " = " + val + ")"
+        if node.children.length
+            li.xml-list
+                ul.xml-nested
+                   each item in node.children
+                         mixin childs(item)
+    else
+        if node.text
+            li.xml-node-text= node.text
+
+ul.xml-struct
+    mixin childs(doc)

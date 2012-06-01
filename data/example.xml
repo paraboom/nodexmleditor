@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><root><node-first><another-node-here>with some text</another-node-here>Text in first node</node-first><node-second>Text in second node</node-second></root>
+<root><newnode attribute1="value1" attribute2="value2"><another-node-here yo="fuck" lala="asdfsd" joke="koke">with some text</another-node-here>        Text in first node        <one-more-node-here/><twice/></newnode><node-second>Text in second node</node-second></root>
