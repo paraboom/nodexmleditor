@@ -30,3 +30,7 @@ body {
 .xml-node-text {
     color: #555;
 }
+
+.xml-node-text-value[contentEditable='true'] {
+    outline: 1px solid red;
+}

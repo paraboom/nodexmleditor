@@ -1,6 +1,7 @@
 mixin childs(node)
     if node.name
-        li.xml-node-name= node.name
+        li.xml-node-name(id='nodeid' + node.id)
+            span.xml-node-name-value= node.name
             if node.attributes
                 each val, key in node.attributes
                     span.xml-node-attribute= "(" + key + " = " + val + ")"
@@ -11,7 +12,8 @@ mixin childs(node)
                          mixin childs(item)
     else
         if node.text
-            li.xml-node-text= node.text
+            li.xml-node-text(id='nodeid' + node.id)
+                span.xml-node-text-value= node.text
 
 ul.xml-struct
     mixin childs(doc)
