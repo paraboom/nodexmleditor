@@ -1,14 +1,14 @@
 @import url('bootstrap.css');
 @import url('bootstrap-responsive.css');
 
-body {
-    font-family: Arial;
-}
-
 .xml-struct,
 .xml-nested {
     list-style: none;
     margin: 0;
+}
+
+.xml-nested {
+    margin-left: 40px;
 }
 
 .xml-struct li {
@@ -32,6 +32,56 @@ body {
     color: #555;
 }
 
-.xml-node-text-value[contentEditable='true'] {
-    outline: 1px solid red;
+.xml-editable {
+    position: relative;
+    display:inline-block;
+    z-index: 5;
+}
+
+.xml-editable:hover,
+.xml-editable.active {
+    background: rgba(0,0,0,0.3);
+    padding: 3px;
+    margin: -3px;
+    color: #000;
+    
+    border-radius: 3px;
+}
+
+.xml-editable.xml-node-text-value[contentEditable='true'] {
+    border: 1px solid red;
+    padding: 2px;
+    outline: none;
+}
+
+.xml-editable.xml-node-text-value[contentEditable='true'] .xml-edit-panel {
+    top: -1px;
+    padding-left: 4px;
+}
+
+.xml-edit-panel {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.xml-edit-panel .icon-edit,
+.xml-edit-panel .icon-ok-sign,
+.xml-edit-panel .icon-remove-sign {
+    display: none;
+    margin-right: 1px;
+}
+
+.xml-editable:hover .xml-edit-panel,
+.xml-editable.active .xml-edit-panel{
+    display: block;
+    width: 16px;
+}
+
+.xml-editable:hover .xml-edit-panel .icon-edit,
+.xml-editable.active .xml-edit-panel .icon-edit{
+    display: inline-block;
 }

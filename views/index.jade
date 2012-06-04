@@ -13,7 +13,8 @@ mixin childs(node)
     else
         if node.text
             li.xml-node-text(id='nodeid' + node.id)
-                span.xml-node-text-value= node.text
+                span.xml-node-text-value.xml-editable= node.text
 
-ul.xml-struct
-    mixin childs(doc)
+div#xml_container.container
+    ul.xml-struct
+        mixin childs(doc)
