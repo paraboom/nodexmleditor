@@ -22,10 +22,7 @@
 .xml-node-attribute {
     display: inline-block;
     color: #556dff;
-}
-
-.xml-node-attribute:first-child {
-    margin-left: 0.5em;
+    margin-left: 3px;
 }
 
 .xml-node-text {
@@ -38,14 +35,35 @@
     z-index: 5;
 }
 
+.xml-editable:focus,
+.xml-editable:active {
+    outline: none;
+}
+
 .xml-editable:hover,
 .xml-editable.active {
-    background: rgba(0,0,0,0.3);
+    background: rgba(163, 163, 163,1);
     padding: 3px;
     margin: -3px;
     color: #000;
     
+    -webkit-border-radius: 3px;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius: 3px;
+    -moz-border-radius-topright: 0;
     border-radius: 3px;
+    border-top-right-radius: 0;
+    
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0, 0.85);
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0, 0.85);
+    box-shadow: 1px 1px 3px rgba(0,0,0, 0.85);
+    
+    z-index: 10;
+}
+
+#xml_container .xml-editable.xml-node-attribute:hover,
+#xml_container .xml-editable.xml-node-attribute.active {
+    margin-left: 0;
 }
 
 .xml-editable.xml-node-text-value[contentEditable='true'] {
@@ -57,6 +75,8 @@
 .xml-editable.xml-node-text-value[contentEditable='true'] .xml-edit-panel {
     top: -1px;
     padding-left: 4px;
+    padding-top: 0;
+    z-index: 11;
 }
 
 .xml-edit-panel {
@@ -66,6 +86,14 @@
     top: 0;
     padding-left: 3px;
     cursor: pointer;
+    background: rgba(163, 163, 163,1);
+    
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .xml-edit-panel .icon-edit,
@@ -75,13 +103,25 @@
     margin-right: 1px;
 }
 
+.xml-edit-panel .icon-edit {
+    display: inline-block;
+}
+
 .xml-editable:hover .xml-edit-panel,
 .xml-editable.active .xml-edit-panel{
     display: block;
     width: 16px;
 }
 
-.xml-editable:hover .xml-edit-panel .icon-edit,
-.xml-editable.active .xml-edit-panel .icon-edit{
+.xml-editable.edited .xml-edit-panel .icon-ok-sign,
+.xml-editable.edited .xml-edit-panel .icon-remove-sign {
     display: inline-block;
+}
+
+.xml-editable.edited .icon-edit {
+    display: none;
+}
+
+.xml-editable.edited .xml-edit-panel {
+    width: 32px;
 }

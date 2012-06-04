@@ -12,6 +12,7 @@ var DomJS = require("dom-js").DomJS;
 app.configure(function () {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
+    app.set('view options', { layout: false });
     app.use(express.logger());
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
@@ -88,7 +89,6 @@ function createXML(str, callback) {
     parser.parse(str, function(err, dom){
         dom.children[0].name = 'newnode';
         callback(dom);
-        // console.log("serializes to : " + dom.toXml());
     });    
 }
 
@@ -108,12 +108,30 @@ app.get('/', function(req, res){
 
 app.post('/change/', function(req, res){
     var nodeid = req.body.id.match(/\d+/)[0];
-    console.log(findNode(nodeid, function(matched){
-        matched.text = req.body.text;
+    findNode(nodeid, function(matched){
+        switch (req.body.type) {
+            case 'attr':
+                var text = req.body.text.split('=');
+                if (matched.attributes[text[0].trim()]) {
+                    matched.attributes[text[0].trim()] = text[1].trim();
+                }
+                break;
+            case 'name':
+                var text = req.body.text.trim();
+                matched.name = text;
+                break;
+            case 'text':
+                var text = req.body.text.trim();
+                matched.text = text;
+                break;
+        }
         fs.writeFile('data/example.xml', ourXML.toXml(), function(err){
             if (err) console.log(err);
+            res.render('xmlinhtml', {
+                doc: ourXML
+            });
         });
-    }));
+    });
 });
 
 

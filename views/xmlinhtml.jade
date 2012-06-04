@@ -1,0 +1,19 @@
+mixin childs(node)
+    if node.name
+        li.xml-node-name(id='nodeid' + node.id,data-type='name')
+            span.xml-node-name-value.xml-editable= node.name
+            if node.attributes
+                each val, key in node.attributes
+                    span.xml-node-attribute.xml-editable(data-type='attr')= key + "=" + val
+        if node.children.length
+            li.xml-list
+                ul.xml-nested
+                   each item in node.children
+                         mixin childs(item)
+    else
+        if node.text
+            li.xml-node-text(id='nodeid' + node.id,data-type='text')
+                span.xml-node-text-value.xml-editable= node.text
+
+ul.xml-struct
+    mixin childs(doc)
