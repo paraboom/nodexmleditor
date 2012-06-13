@@ -1,1 +1,1 @@
-<root><newnode attribute1="val" attribute2="value2"><another-node-here yo="fuck" lala="asdfsd" joke="koke">with some text asdf</another-node-here>another text her hi<one-more-node-here/><twice/></newnode><node-second>Text in second row</node-second></root>
+<root><newnode attribute1="val" attribute2="value3"><another-node-here yo="fuck" lala="asdfsd" joke="keke">русский текст как?</another-node-here>another texthi<one-more-node-her2/><twice/></newnode><node-second>Text in second row</node-second></root>

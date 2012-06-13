@@ -87,7 +87,6 @@ function createXML(str, callback) {
     var parser = new DomJS();
     
     parser.parse(str, function(err, dom){
-        dom.children[0].name = 'newnode';
         callback(dom);
     });    
 }

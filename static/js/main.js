@@ -1,4 +1,8 @@
+/**
+ * Операции непосредственно с модификацией XML
+ */
 xmlOperations = {
+    // Отправка нового значения ноды на сервер
     saveData: function(el, callback) {
         var node =  $(el).data('type') == 'attr' ? $(el) : $(el).closest('li');
         var data = {
@@ -9,19 +13,27 @@ xmlOperations = {
         $.post('/change/', data, function(res){
             callback(res);
         });
+    },
+    checkValue: function(data) {
+        var test = (data.type == 'text') ? new RegExp("^[a-zа-яё0-9]*$", "ig") : new RegExp("^[a-z0-9]*$", "ig");
     }
 }
 
 $(function(){
+        // Контейнер для дерева
     var container = $('#xml_container'),
+        // Ноды, которые можно редактировать
         editableNodes;
-        
-    processLoadedContent();
+    
+    processLoadedContent(function(){
+        container.addClass('allow-hover');
+    });
     
     container.on('click', '.icon-edit', function(evt){
         var node = $(this).closest('.xml-editable'),
             nodeDOM = node[0];
         
+        container.removeClass('allow-hover');
         node.toggleClass('active', true).attr('contentEditable', true).focus();
         
         for (var i=0, l = nodeDOM.childNodes.length; i<l; i++) {
@@ -56,6 +68,7 @@ $(function(){
         xmlOperations.saveData(el, function(res){
             container.html(res);
             processLoadedContent();
+            resetContainerState();
         });
     });
     
@@ -81,6 +94,9 @@ $(function(){
         } 
     });
     
+    /**
+     * Возвращаем старые значение, если редактирвоание было отменено
+     */
     function cancelEdit() {
         var tmp = editableNodes.filter('.active');
         tmp.each(function(i, el){
@@ -90,12 +106,26 @@ $(function(){
                 .toggleClass('edited', false)
                 .attr('contentEditable', false);
         });
+        resetContainerState();
     }
     
-    function processLoadedContent() {
+    /**
+     * Убираем выделение и возвращаем возможность ховера
+     */
+    function resetContainerState() {
+        window.getSelection().removeAllRanges()
+        container.addClass('allow-hover');
+    }
+    
+    /**
+     * Добавляем иконки к нодам, которые можно редактировать
+     */
+    function processLoadedContent(callback) {
         editableNodes = container.find('.xml-editable');
         
         var iconsPanel = editableNodes.append('<span class="xml-edit-panel" contentEditable="false"></span>').find('.xml-edit-panel');
         iconsPanel.append('<i class="icon-edit icon-white" /><i class="icon-ok-sign icon-white" /><i class="icon-remove-sign icon-white" />');
+        
+        callback && callback();
     };
 });
