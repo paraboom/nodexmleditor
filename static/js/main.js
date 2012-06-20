@@ -1,7 +1,9 @@
+"use strict";
+
 /**
  * Операции непосредственно с модификацией XML
  */
-xmlOperations = {
+var xmlOperations = {
     // Отправка нового значения ноды на сервер
     saveData: function(el, callback) {
         var node =  $(el).data('type') == 'attr' ? $(el) : $(el).closest('li');
@@ -17,7 +19,7 @@ xmlOperations = {
     checkValue: function(data) {
         var test = (data.type == 'text') ? new RegExp("^[a-zа-яё0-9]*$", "ig") : new RegExp("^[a-z0-9]*$", "ig");
     }
-}
+};
 
 $(function(){
         // Контейнер для дерева
